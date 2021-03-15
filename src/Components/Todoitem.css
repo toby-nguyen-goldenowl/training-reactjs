@@ -1,0 +1,11 @@
+.TodoItem{
+    font-family: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 24px;
+    font-weight: 300px;;
+    color: #4d4d4d;
+
+}
+.TodoItem-Complete{
+    text-decoration: line-through;
+    opacity: 0.4;
+}
