@@ -3,9 +3,19 @@
     font-size: 24px;
     font-weight: 300px;;
     color: #4d4d4d;
-
+    display:flex;
+    border-bottom:1px solid #bebebe ;
 }
-.TodoItem-Complete{
+
+.TodoItem > p{
+    margin: 0 0 0 20px;
+    padding: 10px 5px;
+    
+}
+.TodoItem:last-child{
+    border-bottom: none;
+}
+.TodoItem-Complete > p{
     text-decoration: line-through;
     opacity: 0.4;
 }

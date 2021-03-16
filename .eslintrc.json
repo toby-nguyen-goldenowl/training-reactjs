@@ -8,6 +8,24 @@
     "prettier"
   ],
   "rules": {
+    "react/destructuring-assignment": "off",
+    "jsx-a11y/no-static-element-interactions":"off",
+    "import/newline-after-import": "off" ,
+    "react/prop-types": "off",
+    "react/prefer-stateless-function": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": [
+      "error",
+      {
+        "handlers": [
+          "onClick",
+          "onMouseDown",
+          "onMouseUp",
+          "onKeyPress",
+          "onKeyDown",
+          "onKeyUp"
+        ]
+      }
+    ],
     "react/jsx-filename-extension": [
       1,
       {
