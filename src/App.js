@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './App.css';
+import uuid from 'react-uuid';
 import TodoItem from './Components/Todoitem';
 import DownArrow from './Components/img/down-arrow.svg';
 import { addItem, onchange } from './store/actions/index';
@@ -13,7 +14,6 @@ class App extends Component {
       hiddenState: false,
     };
     this.count = 0;
-    this.countId = 0;
     this.onkeyup = this.onkeyup.bind(this);
     this.onchange = this.onchange.bind(this);
     this.handleClickAll = this.handleClickAll.bind(this);
@@ -58,10 +58,9 @@ class App extends Component {
       if (!text) {
         return null;
       }
-      this.countId += 1;
       addItems({
         toDoItemsList: [
-          { id: this.countId, item: text, isComplete: false },
+          { id: uuid(), item: text, isComplete: false },
           ...toDoItemsList,
         ],
       });
