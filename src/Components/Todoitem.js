@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import './Todoitem.css';
+import { connect } from 'react-redux';
 import classNames from 'classnames';
+import { handleClickItem } from '../store/actions/index';
 class TodoItem extends Component {
-  /* cách xử lý cho onclick khi không có context */
   constructor(props) {
     super(props);
     this.handleItem = this.handleItem.bind(this);
   }
 
   handleItem() {
-    const { item, onclick } = this.props;
+    const { item, handleClickItems } = this.props;
     // eslint-disable-next-line no-unused-expressions
-    onclick && onclick({ ...item, isComplete: !item.isComplete });
+    handleClickItems &&
+      handleClickItems({ ...item, isComplete: !item.isComplete });
   }
 
   render() {
@@ -39,4 +41,12 @@ class TodoItem extends Component {
     );
   }
 }
-export default TodoItem;
+
+const mapDispatchToProps = {
+  handleClickItems: handleClickItem,
+};
+
+const mapStateToProps = (state) => ({
+  toDoItemsList: state.todo.toDoItemsList,
+});
+export default connect(mapStateToProps, mapDispatchToProps)(TodoItem);

@@ -39,7 +39,9 @@
     "max-len": [
       "error",
       80
-    ]
+    ],
+      "no-param-reassign": ["error", { "props": false }] 
+
   },
   "env": {
     "browser": true
