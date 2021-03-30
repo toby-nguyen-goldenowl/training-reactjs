@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
 import uuid from 'react-uuid';
 import TodoItem from './Components/Todoitem';
 import DownArrow from './Components/img/down-arrow.svg';
 import { addItem, onchange } from './store/actions/index';
+import RouteConfigExample, { Routes } from './routes';
+import LinkRoute from './Components/Link';
 
 class App extends Component {
   constructor() {
@@ -107,55 +110,64 @@ class App extends Component {
   render() {
     const { currentFilter } = this.state;
     const { toDoItemsList, newItem } = this.props;
-
     return (
-      <div className="App">
-        <div className="Header">
-          <button type="button" onClick={this.handleClickAll}>
-            <img src={DownArrow} alt="down-arrow" width="32px" height="32px " />
-          </button>
-          <input
-            type="text"
-            placeholder="what needs to be done"
-            onKeyUp={this.onkeyup}
-            value={newItem}
-            onChange={this.onchange}
-          />
+      <Router>
+        <div className="App">
+          <div>{RouteConfigExample({ routes: Routes })}</div>
+          <div className="Header">
+            <button type="button" onClick={this.handleClickAll}>
+              <img
+                src={DownArrow}
+                alt="down-arrow"
+                width="32px"
+                height="32px "
+              />
+            </button>
+            <input
+              type="text"
+              placeholder="what needs to be done"
+              onKeyUp={this.onkeyup}
+              value={newItem}
+              onChange={this.onchange}
+            />
+          </div>
+          {toDoItemsList &&
+            toDoItemsList.map((objItem) => {
+              if (
+                currentFilter === 'active' &&
+                objItem &&
+                objItem.isComplete === false
+              ) {
+                return this.renderItem(objItem, currentFilter);
+              }
+              if (
+                currentFilter === 'completed' &&
+                objItem &&
+                objItem.isComplete === true
+              ) {
+                return this.renderItem(objItem, currentFilter);
+              }
+              if (currentFilter === 'all' && objItem) {
+                return this.renderItem(objItem, currentFilter);
+              }
+              return null;
+            })}
+          {toDoItemsList.length === 0 && 'Nothing here'}
+          <div className="BtnOptionClick ">
+            <button type="button" onClick={() => this.clickFilter('all')}>
+              All
+            </button>
+            <button type="button" onClick={() => this.clickFilter('active')}>
+              Active
+            </button>
+            <button type="button" onClick={() => this.clickFilter('completed')}>
+              Completed
+            </button>
+          </div>
         </div>
-        {toDoItemsList &&
-          toDoItemsList.map((objItem) => {
-            if (
-              currentFilter === 'active' &&
-              objItem &&
-              objItem.isComplete === false
-            ) {
-              return this.renderItem(objItem, currentFilter);
-            }
-            if (
-              currentFilter === 'completed' &&
-              objItem &&
-              objItem.isComplete === true
-            ) {
-              return this.renderItem(objItem, currentFilter);
-            }
-            if (currentFilter === 'all' && objItem) {
-              return this.renderItem(objItem, currentFilter);
-            }
-            return null;
-          })}
-        {toDoItemsList.length === 0 && 'Nothing here'}
-        <div className="BtnOptionClick ">
-          <button type="button" onClick={() => this.clickFilter('all')}>
-            All
-          </button>
-          <button type="button" onClick={() => this.clickFilter('active')}>
-            Active
-          </button>
-          <button type="button" onClick={() => this.clickFilter('completed')}>
-            Completed
-          </button>
-        </div>
-      </div>
+        <div>{LinkRoute()}</div>
+        {/* <Switch>{showContentMenus(Routes)}</Switch> */}
+      </Router>
     );
   }
 }
