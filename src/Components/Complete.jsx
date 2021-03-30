@@ -1,8 +1,9 @@
 import React from 'react';
 
-const Complete = () => (
+const Complete = ({ children }) => (
   <div>
     <h2 className="text">Complete</h2>
+    {children}
   </div>
 );
 

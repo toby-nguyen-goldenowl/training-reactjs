@@ -11,23 +11,18 @@ export default function LinkRoute() {
         </Link>
       </div>
       <div>
-        <Link to="/all" className="MyLink">
-          All
+        <Link to="/all/todo" className="MyLink">
+          AllTodo
         </Link>
       </div>
       <div>
-        <Link to="/active/test" className="MyLink">
-          Active
+        <Link to="/active/todo" className="MyLink">
+          ActiveTodo
         </Link>
       </div>
       <div>
-        <Link to="/active" className="MyLink">
-          Active
-        </Link>
-      </div>
-      <div>
-        <Link to="/completed" className="MyLink">
-          Complete
+        <Link to="/completed/todo" className="MyLink">
+          CompleteTodo
         </Link>
       </div>
     </div>
