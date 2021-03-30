@@ -9,6 +9,12 @@
   display: flex;
   border-bottom: 1px solid #eee;
 }
+.App .text {
+  padding: 10px 5px;
+  display: block;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
 .App .Header input {
   font-family: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 24px;
