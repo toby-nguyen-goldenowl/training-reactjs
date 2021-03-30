@@ -1,0 +1,47 @@
+[33mcommit 90d24d1b831728b3bb9a64932293300730598b93[m[33m ([m[1;36mHEAD -> [m[1;32mfeature/basic-reactjs[m[33m, [m[1;31morigin/feature/basic-reactjs[m[33m)[m
+Author: Toby <toby.nguyen.goldenowl@gmail.com>
+Date:   Tue Mar 30 09:56:42 2021 +0700
+
+    router for todo-list
+
+[33mcommit db2bab8292e9318c24e829448262e07fc1fb3aae[m
+Author: Toby <toby.nguyen.goldenowl@gmail.com>
+Date:   Fri Mar 26 13:47:42 2021 +0700
+
+    fix id for toDoItemsList
+
+[33mcommit 0e9eec1789c35cedbe7983dd0321fef3874e80ed[m
+Author: Toby <toby.nguyen.goldenowl@gmail.com>
+Date:   Fri Mar 26 12:06:52 2021 +0700
+
+    local storage,redux for todo-list
+
+[33mcommit 4eadc6228d4b70f79dd7dcedf45ad049e3060762[m
+Author: Toby <toby.nguyen.goldenowl@gmail.com>
+Date:   Thu Mar 18 23:47:24 2021 +0700
+
+    feat:done feature filter all,active,completed
+
+[33mcommit 8a1acb6435edae2cd2cf0bcdbdae92cada30a8b5[m
+Author: Toby <toby.nguyen.goldenowl@gmail.com>
+Date:   Tue Mar 16 17:52:31 2021 +0700
+
+    feat:clicked img to check
+
+[33mcommit 2ee13bc4c90ed1b552b5a928441923728121a065[m
+Author: Toby <toby.nguyen.goldenowl@gmail.com>
+Date:   Mon Mar 15 18:14:16 2021 +0700
+
+    create class TodoItem,css to handle
+
+[33mcommit da587604b3efe574b082b427f7aa44ea4d9059c8[m
+Author: Toby <toby.nguyen.goldenowl@gmail.com>
+Date:   Mon Mar 15 15:03:35 2021 +0700
+
+    style: eslint and  prettier conflict
+
+[33mcommit 78779bfd71d9ff2bde4143e1dc42bb573b1dc6ee[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m, [m[1;32mdevelop[m[33m)[m
+Author: Toby <toby.nguyen.goldenowl@gmail.com>
+Date:   Mon Mar 15 09:37:24 2021 +0700
+
+    Initialize project using Create React App
