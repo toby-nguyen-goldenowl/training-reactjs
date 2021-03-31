@@ -3,9 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
+import * as Sentry from '@sentry/react';
+import { Integrations } from '@sentry/tracing';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './store/configureStore';
+
+Sentry.init({
+  dsn:
+    'https://a51c7658389f4dc2b1eb4c7c7b622e31@o561538.ingest.sentry.io/5700169',
+  integrations: [new Integrations.BrowserTracing()],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
 
 ReactDOM.render(
   <React.StrictMode>

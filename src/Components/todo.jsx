@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import uuid from 'react-uuid';
 import TodoItem from './Todoitem';
-import { addItem, onchange } from '../store/index';
+import { addItem, onchange } from '../store/actions/index';
 import DownArrow from './img/down-arrow.svg';
 
 class Todo extends Component {
