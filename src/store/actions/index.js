@@ -21,6 +21,16 @@ export const onchange = (newItem) => ({
   newItem,
 });
 
+export const loadData = (data) => ({
+  type: types.LOAD_DATA,
+  data,
+});
+
+export const authUser = (user) => ({
+  type: types.AUTH_USERID,
+  user,
+});
+
 // export const addItem = (object) => ({
 //   type: types.ADD_ITEM,
 //   object,

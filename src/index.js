@@ -8,7 +8,7 @@ import { Integrations } from '@sentry/tracing';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './store/configureStore';
-
+import Test from './Components/Test';
 Sentry.init({
   dsn:
     'https://a51c7658389f4dc2b1eb4c7c7b622e31@o561538.ingest.sentry.io/5700169',
@@ -19,7 +19,9 @@ Sentry.init({
   // We recommend adjusting this value in production
   tracesSampleRate: 1.0,
 });
-
+<Sentry.ErrorBoundary fallback="An error has occurred">
+  <Test />
+</Sentry.ErrorBoundary>;
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store().store}>

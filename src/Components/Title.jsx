@@ -1,10 +1,16 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 const Title = ({ children }) => (
-  <div>
-    <h2 className="text">Title</h2>
+  <>
+    <div>
+      <div>
+        <Link to="/signin" className="MyLink">
+          Sign In
+        </Link>
+      </div>
+    </div>
     {children}
-  </div>
+  </>
 );
 
 export default Title;

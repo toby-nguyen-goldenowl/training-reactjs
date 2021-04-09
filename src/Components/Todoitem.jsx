@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import firebase from 'firebase/app';
+import 'firebase/database';
+import 'firebase/auth';
 import './Todoitem.css';
+import '../connectdb/firebaseConnect';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { handleClickItem } from '../store/actions/index';
@@ -10,10 +14,20 @@ class TodoItem extends Component {
   }
 
   handleItem() {
-    const { item, handleClickItems } = this.props;
+    const { item, handleClickItems, userId, toDoItemsList } = this.props;
     // eslint-disable-next-line no-unused-expressions
     handleClickItems &&
       handleClickItems({ ...item, isComplete: !item.isComplete });
+    const key = Object.keys(toDoItemsList).find(
+      (keys) => toDoItemsList && toDoItemsList[keys].id === item.id,
+    );
+    const dataUser = firebase
+      .database()
+      .ref(`users/${userId}/todo/toDoItemsList/${key}`);
+    dataUser.set({
+      isComplete: !item.isComplete,
+      item: item.item,
+    });
   }
 
   render() {
@@ -48,5 +62,8 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => ({
   toDoItemsList: state.todo.toDoItemsList,
+  userId: state.user.userId,
+  loading: state.user.loading,
 });
+
 export default connect(mapStateToProps, mapDispatchToProps)(TodoItem);
