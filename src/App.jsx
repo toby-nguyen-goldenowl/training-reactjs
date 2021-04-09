@@ -10,7 +10,6 @@ class App extends Component {
         <div className="App">
           <div>{RouteConfig({ routes: Routes })}</div>
         </div>
-        {/* <Switch>{showContentMenus(Routes)}</Switch> */}
       </Router>
     );
   }

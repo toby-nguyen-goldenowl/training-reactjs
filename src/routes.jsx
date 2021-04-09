@@ -60,28 +60,6 @@ export default function RouteConfig({ routes }) {
           )}
         />
       ))}
-      {/* {Object.values.map((route) => (
-        <Route
-          key={uuid()}
-          path={route.path}
-          render={(props) => (
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            <route.component {...props}>
-              {route[routes] ? RouteConfig({ routes: route.routes }) : null}
-            </route.component>
-          )}
-        />
-      ))} */}
     </Switch>
   );
 }
-
-// export function showContentMenus(routes) {
-//   let result = null;
-//   if (routes.length > 0) {
-//     result = routes.map((route) => (
-//       <Route path={route.path} exact component={route.component} />
-//     ));
-//   }
-//   return result;
-// }
