@@ -9,18 +9,20 @@ import { connect } from 'react-redux';
 // import Todo from './Components/todo';
 // import SignForm from './Components/SignForm';
 // import SignUpForm from './Components/SignUp';
-import './connectdb/firebaseConnect';
+import './configdb/firebaseConfig';
 
-const AllComponent = lazy(() => import('./Components/All'));
-const ActiveComponent = lazy(() => import('./Components/Active'));
-const CompleteComponent = lazy(() => import('./Components/Complete'));
-const TitleComponent = lazy(() => import('./Components/Title'));
-const TodoComponent = lazy(() => import('./Components/todo'));
-const SignFormComponent = lazy(() => import('./Components/SignForm'));
-const SignUpFormComponent = lazy(() => import('./Components/SignUp'));
-const LoadingComponent = lazy(() => import('./Components/Loading'));
-const SuccessSignUp = lazy(() => import('./Components/SuccessSignUp'));
-const NotSuccessSignUp = lazy(() => import('./Components/NotSuccessSignUp'));
+const AllComponent = lazy(() => import('./Components/ToDo/All'));
+const ActiveComponent = lazy(() => import('./Components/ToDo/Active'));
+const CompleteComponent = lazy(() => import('./Components/ToDo/Complete'));
+const TitleComponent = lazy(() => import('./Components/ToDo/Title'));
+const TodoComponent = lazy(() => import('./Components/ToDo/ToDo'));
+const SignFormComponent = lazy(() => import('./Components/Login/SignForm'));
+const SignUpFormComponent = lazy(() => import('./Components/Login/SignUp'));
+const LoadingComponent = lazy(() => import('./Components/Login/Loading'));
+const SuccessSignUp = lazy(() => import('./Components/Login/SuccessSignUp'));
+const NotSuccessSignUp = lazy(() =>
+  import('./Components/Login/NotSuccessSignUp'),
+);
 
 export const Routes = {
   SignIn: {
@@ -122,10 +124,6 @@ export default function RouteConfig({ routes }) {
               )}
             />
           );
-        }
-
-        if (!route.auth) {
-          return <Redirect to="/aaaaaa" />;
         }
         return null;
       })}

@@ -1,10 +1,30 @@
 import React from 'react';
 import { Formik } from 'formik';
+import firebase from 'firebase/app';
 import './HandlerForm.css';
 import 'firebase/database';
 import 'firebase/auth';
-import '../connectdb/firebaseConnect';
-import { HandleFormSignup } from './handlerForm';
+import '../../configdb/firebaseConfig';
+import { sha256 } from 'js-sha256';
+
+const HandleFormSignup = (values) => {
+  const { email } = values;
+  const password = sha256(values.password);
+  firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then((value) => {
+      const dataUser = firebase.database().ref(`users/${value.user.uid}`);
+      dataUser.set({
+        email,
+        password,
+      });
+      window.location = '/signup/success-signin';
+    })
+    .catch(() => {
+      window.location = '/signup/not-success-signin';
+    });
+};
 
 const SignUpForm = ({ children }) => (
   <>

@@ -1,9 +1,10 @@
 import firebase from 'firebase/app';
 import 'firebase/database';
 // import * as firebaseui from 'firebaseui';
+
 require('firebase/auth');
 const firebaseConfig = {
-  apiKey: 'AIzaSyBeWF5_f1tRN_ai-eyfrY0Rvfn82yYEgnU',
+  apiKey: process.env.REACT_APP_API_KEY,
   authDomain: 'todoapp-e2276.firebaseapp.com',
   projectId: 'todoapp-e2276',
   storageBucket: 'todoapp-e2276.appspot.com',

@@ -4,11 +4,11 @@ import uuid from 'react-uuid';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
-import '../connectdb/firebaseConnect';
+import '../../configdb/firebaseConfig';
 // import firebase from '../connectdb/firebaseConnect';
 import TodoItem from './Todoitem';
-import { addItem } from '../store/actions/index';
-import DownArrow from './img/down-arrow.svg';
+import { addItem } from '../../store/actions/index';
+import DownArrow from '../img/down-arrow.svg';
 
 class Todo extends Component {
   constructor() {

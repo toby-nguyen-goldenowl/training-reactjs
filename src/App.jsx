@@ -5,7 +5,7 @@ import firebase from 'firebase/app';
 import './App.css';
 import RouteConfig, { Routes } from './routes';
 import { authUser } from './store/actions/index';
-
+require('dotenv').config();
 require('firebase/auth');
 class App extends Component {
   constructor() {

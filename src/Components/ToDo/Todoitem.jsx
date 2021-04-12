@@ -3,10 +3,10 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
 import './Todoitem.css';
-import '../connectdb/firebaseConnect';
+import '../../configdb/firebaseConfig';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import { handleClickItem } from '../store/actions/index';
+import { handleClickItem } from '../../store/actions/index';
 class TodoItem extends Component {
   constructor(props) {
     super(props);
