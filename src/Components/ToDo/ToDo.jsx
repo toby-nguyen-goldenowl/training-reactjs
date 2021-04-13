@@ -7,9 +7,9 @@ import 'firebase/auth';
 import '../../configdb/firebaseConfig';
 // import firebase from '../connectdb/firebaseConnect';
 import TodoItem from './Todoitem';
+
 import { addItem } from '../../store/actions/index';
 import DownArrow from '../img/down-arrow.svg';
-
 class Todo extends Component {
   constructor() {
     super();

@@ -1,4 +1,4 @@
-import React, { Component, Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import firebase from 'firebase/app';
@@ -7,15 +7,11 @@ import RouteConfig, { Routes } from './routes';
 import { authUser } from './store/actions/index';
 require('dotenv').config();
 require('firebase/auth');
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-
-  componentDidMount() {
-    const { authUserId } = this.props;
-    let { userId } = this.props;
+function App(props) {
+  let { userId } = props;
+  const { authUserId } = props;
+  useEffect(() => {
+    console.log(1);
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         userId = user.uid;
@@ -25,20 +21,31 @@ class App extends Component {
         authUserId(userId);
       }
     });
-  }
+  }, [userId]);
+  // componentDidMount() {
+  //   const { authUserId } = this.props;
+  //   let { userId } = this.props;
+  //   firebase.auth().onAuthStateChanged((user) => {
+  //     if (user) {
+  //       userId = user.uid;
+  //       authUserId(userId);
+  //     } else {
+  //       userId = undefined;
+  //       authUserId(userId);
+  //     }
+  //   });
+  // }
 
-  render() {
+  return (
     // const { userId } = this.props;
-    return (
-      <Router>
-        <Suspense fallback={<div>Loading...</div>}>
-          <div className="App">
-            <div>{RouteConfig({ routes: Routes })}</div>
-          </div>
-        </Suspense>
-      </Router>
-    );
-  }
+    <Router>
+      <Suspense fallback={<div>Loading...</div>}>
+        <div className="App">
+          <div>{RouteConfig({ routes: Routes })}</div>
+        </div>
+      </Suspense>
+    </Router>
+  );
 }
 
 const mapStateToProps = (state) => ({

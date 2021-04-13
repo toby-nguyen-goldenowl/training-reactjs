@@ -1,16 +1,29 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-const Title = ({ children }) => (
+import LogOut from '../Login/Logout';
+
+const Title = (props) => (
   <>
     <div>
       <div>
-        <Link to="/signin" className="MyLink">
-          Sign In
-        </Link>
+        {props.userId ? (
+          <LogOut />
+        ) : (
+          <Link to="/signin" className="MyLink">
+            Sign In
+          </Link>
+        )}
       </div>
     </div>
-    {children}
+    {props.children}
   </>
 );
 
-export default Title;
+const mapStateToProps = (state) => ({
+  toDoItemsList: state.todo.toDoItemsList,
+  userId: state.user.userId,
+  loading: state.user.loading,
+});
+
+export default connect(mapStateToProps, null)(Title);
