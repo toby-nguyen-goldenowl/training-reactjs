@@ -11,7 +11,6 @@ function App(props) {
   let { userId } = props;
   const { authUserId } = props;
   useEffect(() => {
-    console.log(1);
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         userId = user.uid;
