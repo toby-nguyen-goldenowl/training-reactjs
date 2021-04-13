@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import uuid from 'react-uuid';
+import firebase from 'firebase/app';
+import 'firebase/database';
+import 'firebase/auth';
+import '../../configdb/firebaseConfig';
+// import firebase from '../connectdb/firebaseConnect';
 import TodoItem from './Todoitem';
-import { addItem, onchange } from '../store/actions/index';
-import DownArrow from './img/down-arrow.svg';
 
+import { addItem } from '../../store/actions/index';
+import DownArrow from '../img/down-arrow.svg';
 class Todo extends Component {
   constructor() {
     super();
     this.state = {
+      newItem: '',
       currentFilter: 'all', // all,active,completed
       hiddenState: false,
     };
@@ -21,24 +27,39 @@ class Todo extends Component {
 
   componentDidMount() {
     const { toDoItemsList } = this.props;
-    toDoItemsList.forEach((element) => {
-      if (element.isComplete === true) {
+    Object.values(toDoItemsList).map((element) => {
+      if (element && element.isComplete === true) {
         this.count += 1;
       }
+      return null;
     });
   }
 
   handleClickAll() {
-    const { toDoItemsList } = this.props;
+    const { toDoItemsList, userId } = this.props;
     let { hiddenState } = this.state;
     hiddenState = !hiddenState;
     if (hiddenState === true) {
-      toDoItemsList.forEach((todo) => {
-        todo.isComplete = true;
+      Object.keys(toDoItemsList).forEach((key) => {
+        toDoItemsList[key].isComplete = true;
+        const dataUser = firebase
+          .database()
+          .ref(`users/${userId}/todo/toDoItemsList/${key}`);
+        dataUser.set({
+          item: toDoItemsList[key].item,
+          isComplete: true,
+        });
       });
     } else {
-      toDoItemsList.forEach((todo) => {
-        todo.isComplete = false;
+      Object.keys(toDoItemsList).forEach((key) => {
+        toDoItemsList[key].isComplete = false;
+        const dataUser = firebase
+          .database()
+          .ref(`users/${userId}/todo/toDoItemsList/${key}`);
+        dataUser.set({
+          item: toDoItemsList[key].item,
+          isComplete: false,
+        });
       });
     }
     this.setState({
@@ -47,7 +68,7 @@ class Todo extends Component {
   }
 
   onkeyup(event) {
-    const { addItems, toDoItemsList } = this.props;
+    const { addItems, userId } = this.props;
     if (event.keyCode === 13) {
       let text = event.target.value;
       if (!text) {
@@ -57,19 +78,23 @@ class Todo extends Component {
       if (!text) {
         return null;
       }
-      addItems({
-        toDoItemsList: [
-          { id: uuid(), item: text, isComplete: false },
-          ...toDoItemsList,
-        ],
+      const Id = uuid();
+      const dataUser = firebase
+        .database()
+        .ref(`users/${userId}/todo/toDoItemsList/${Id}`);
+      dataUser.set({
+        item: text,
+        isComplete: false,
       });
+      addItems({ id: Id, item: text, isComplete: false });
     }
     return null;
   }
 
   onchange(event) {
-    const { onchanges } = this.props;
-    onchanges(event.target.value);
+    this.setState({
+      newItem: event.target.value,
+    });
   }
 
   checkHiddenBtn(item) {
@@ -98,14 +123,14 @@ class Todo extends Component {
         key={objItem.id}
         item={objItem}
         currentFilter={currentFilter}
-        onclick={(item) => this.clickItem(item)}
+        onclick={this}
       />
     );
   }
 
   render() {
-    const { currentFilter } = this.state;
-    const { toDoItemsList, newItem } = this.props;
+    const { currentFilter, newItem } = this.state;
+    const { toDoItemsList } = this.props;
     return (
       <>
         <div className="Header">
@@ -121,7 +146,9 @@ class Todo extends Component {
           />
         </div>
         {toDoItemsList &&
-          toDoItemsList.map((objItem) => {
+          Object.keys(toDoItemsList).map((key) => {
+            const objItem = toDoItemsList[key];
+            objItem.id = key;
             if (
               currentFilter === 'active' &&
               objItem &&
@@ -160,12 +187,12 @@ class Todo extends Component {
 
 const mapStateToProps = (state) => ({
   toDoItemsList: state.todo.toDoItemsList,
-  newItem: state.todo.newItem,
+  userId: state.user.userId,
+  loading: state.user.loading,
 });
 
 const mapDispatchToProps = {
   addItems: addItem,
-  onchanges: onchange,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Todo);

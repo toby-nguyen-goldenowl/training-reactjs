@@ -1,5 +1,5 @@
 import React from 'react';
-import LinkRoute from './Link';
+import LinkRoute from '../Link';
 
 const Notfound = () => (
   <div>

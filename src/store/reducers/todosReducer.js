@@ -1,42 +1,43 @@
 import * as types from '../constants/ActionTypes';
 const initialState = {
-  newItem: '',
-  toDoItemsList: [],
+  toDoItemsList: {},
 };
 
 const todosReducer = (state = initialState, action) => {
-  const { todo, object, newItem } = action;
+  const { todo, object, data } = action;
   const { toDoItemsList } = state;
-  let index;
   switch (action.type) {
     case types.HANDLE_CLICK_ITEM:
-      index =
-        todo &&
-        state.toDoItemsList.findIndex((toDos) => toDos.id === todo.item.id);
-      if (index > 0) {
-        return {
-          toDoItemsList: [
-            ...toDoItemsList.slice(0, index),
-            todo.item,
-            ...toDoItemsList.slice(index + 1),
-          ],
-        };
-      }
-      if (index === 0) {
-        return {
-          toDoItemsList: [todo.item, ...toDoItemsList.slice(1)],
-        };
-      }
-      return state;
-    case types.ADD_ITEM:
+      toDoItemsList[todo.item.id] = todo.item;
+      // return { ...state };
       return {
-        newItem: '',
-        toDoItemsList: [...object.toDoItemsList],
+        toDoItemsList: { ...toDoItemsList },
+      };
+
+    case types.ADD_ITEM:
+      toDoItemsList[object.id] = {
+        isComplete: object.isComplete,
+        item: object.item,
+      };
+      return {
+        toDoItemsList: { ...toDoItemsList },
       };
     case types.ON_CHANGE:
       return {
-        newItem,
-        toDoItemsList: [...toDoItemsList],
+        toDoItemsList: { ...toDoItemsList },
+      };
+    case types.LOAD_DATA:
+      if (data === undefined) {
+        return {
+          toDoItemsList: {},
+        };
+      }
+      return {
+        toDoItemsList: { ...data.toDoItemsList },
+      };
+    case types.AUTH_USERID:
+      return {
+        toDoItemsList: { ...toDoItemsList },
       };
     default:
       return state;
